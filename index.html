@@ -1,1177 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<<<<<<< HEAD
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>Student Notes Portal</title>
-
-    <!-- LOGIN PROTECTION -->
-    <script>
-
-        if (localStorage.getItem("loggedIn") !== "true") {
-
-            location.href = "index.html";
-
-        }
-
-    </script>
-
-    <!-- GOOGLE FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <style>
-
-        * {
-
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-
-            font-family: Poppins, sans-serif;
-
-        }
-
-        html {
-
-            scroll-behavior: smooth;
-
-        }
-
-        body {
-
-            overflow-x: hidden;
-
-            background:
-                radial-gradient(circle at top left,
-                    rgba(0, 255, 213, 0.12),
-                    transparent 35%),
-
-                radial-gradient(circle at bottom right,
-                    rgba(106, 0, 255, 0.12),
-                    transparent 35%),
-
-                #0f172a;
-
-            color: white;
-
-        }
-
-        body.light {
-
-            background: #f4f4f4;
-            color: black;
-
-        }
-
-        /* SCROLLBAR */
-
-        ::-webkit-scrollbar {
-
-            width: 8px;
-
-        }
-
-        ::-webkit-scrollbar-thumb {
-
-            background: #00eaff;
-            border-radius: 20px;
-
-        }
-
-        /* LOADER */
-
-        .loader {
-
-            position: fixed;
-
-            inset: 0;
-
-            background: #000;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            z-index: 9999;
-
-            font-size: 35px;
-
-            color: #00eaff;
-
-            animation: fadeOut .6s forwards;
-
-            animation-delay: .3s;
-
-        }
-
-        @keyframes fadeOut {
-
-            to {
-
-                opacity: 0;
-                visibility: hidden;
-
-            }
-
-        }
-
-        /* NAVBAR */
-
-        .navbar {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            padding: 18px 30px;
-
-            background: rgba(255,255,255,0.05);
-
-            backdrop-filter: blur(5px);
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 999;
-
-        }
-
-        .logo {
-
-            font-size: 28px;
-
-            color: #00eaff;
-
-            font-weight: 700;
-
-        }
-
-        .nav-links {
-
-            display: flex;
-
-            gap: 15px;
-
-            align-items: center;
-
-            flex-wrap: wrap;
-
-        }
-
-        .nav-links a {
-
-            color: white;
-
-            text-decoration: none;
-
-            font-weight: 500;
-
-        }
-
-        body.light .nav-links a {
-
-            color: black;
-
-        }
-
-        .toggle {
-
-            border: none;
-
-            padding: 10px 18px;
-
-            border-radius: 30px;
-
-            cursor: pointer;
-
-            background: #00eaff;
-
-            font-weight: bold;
-
-        }
-
-        /* HERO */
-
-        .hero {
-
-            text-align: center;
-
-            padding: 60px 20px;
-
-        }
-
-        .hero h1 {
-
-            font-size: 40px;
-
-            color: #00eaff;
-
-        }
-
-        .hero p {
-
-            margin-top: 12px;
-
-            color: #ccc;
-
-        }
-
-        /* SEMESTER GRID */
-
-        .semester-grid {
-
-            width: 90%;
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit,minmax(220px,1fr));
-
-            gap: 20px;
-
-            margin-top: 30px;
-
-        }
-
-        .semester-card {
-
-            background: rgba(255,255,255,0.05);
-
-            backdrop-filter: blur(5px);
-
-            border-radius: 20px;
-
-            padding: 35px;
-
-            text-align: center;
-
-            cursor: pointer;
-
-            transition: .3s;
-
-            font-size: 20px;
-
-            font-weight: 600;
-            text-decoration: none;
-
-        }
-
-        .semester-card:hover {
-
-            transform: translateY(-8px);
-
-            box-shadow: 0 0 20px rgba(31, 119, 127, 0.5);
-
-        }
-
-        /* SUBJECT TABS */
-
-        .tabs {
-
-            display: flex;
-
-            justify-content: center;
-
-            gap: 15px;
-
-            margin-top: 50px;
-
-            flex-wrap: wrap;
-            
-
-        }
-
-        .tab {
-
-            background: #00eaff;
-
-            color: black;
-
-            padding: 12px 22px;
-
-            border-radius: 30px;
-
-            cursor: pointer;
-
-            font-weight: 600;
-
-            transition: .3s;
-
-        }
-
-        .tab:hover {
-
-            transform: scale(1.05);
-
-        }
-
-        /* SEARCH */
-
-        .search-box {
-
-            width: 90%;
-
-            max-width: 500px;
-
-            margin: 40px auto;
-
-        }
-
-        .search-box input {
-
-            width: 100%;
-
-            padding: 15px;
-
-            border-radius: 30px;
-
-            border: none;
-
-            outline: none;
-
-            font-size: 16px;
-
-        }
-
-        /* PDF GRID */
-
-        .pdf-grid {
-
-            width: 90%;
-
-            margin: auto;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit,minmax(320px,1fr));
-
-            gap: 25px;
-
-            padding-bottom: 60px;
-
-        }
-
-        .pdf-card {
-
-            background: rgba(255,255,255,0.05);
-
-            backdrop-filter: blur(5px);
-
-            border-radius: 20px;
-
-            overflow: hidden;
-
-            transition: .3s;
-
-        }
-
-        .pdf-card:hover {
-
-            transform: translateY(-8px);
-
-            box-shadow: 0 0 20px rgba(0,234,255,0.4);
-
-        }
-
-        .pdf-title {
-
-            background:
-                linear-gradient(45deg,
-                    #00eaff,
-                    #0077ff);
-
-            color: black;
-
-            padding: 16px;
-
-            text-align: center;
-
-            font-weight: 700;
-
-        }
-
-        iframe {
-
-            width: 100%;
-
-            height: 250px;
-
-            border: none;
-
-        }
-
-        .info {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            padding: 15px;
-
-            color: #ddd;
-
-            font-size: 14px;
-
-        }
-
-        .btns {
-
-            display: flex;
-
-            gap: 10px;
-
-            padding: 15px;
-
-        }
-
-        .btn {
-
-            flex: 1;
-
-            text-align: center;
-
-            padding: 12px;
-
-            border-radius: 10px;
-
-            text-decoration: none;
-
-            font-weight: 600;
-
-        }
-
-        .preview {
-
-            background: #00eaff;
-
-            color: black;
-
-        }
-
-        .download {
-
-            background: #ff0055;
-
-            color: white;
-
-        }
-
-        /* PROFILE */
-
-        .profile {
-
-            width: 90%;
-
-            margin: 50px auto;
-
-            background: rgba(255,255,255,0.05);
-
-            backdrop-filter: blur(5px);
-
-            border-radius: 20px;
-
-            padding: 30px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 20px;
-
-        }
-
-        .profile img {
-
-            width: 100px;
-
-            height: 100px;
-
-            border-radius: 50%;
-
-            border: 4px solid #00eaff;
-
-        }
-
-        /* ADMIN */
-
-        .admin-panel {
-
-            width: 90%;
-
-            margin: 50px auto;
-
-            background: rgba(255,255,255,0.05);
-
-            backdrop-filter: blur(5px);
-
-            border-radius: 20px;
-
-            padding: 30px;
-
-        }
-
-        .admin-panel input {
-
-            width: 100%;
-
-            padding: 14px;
-
-            margin-top: 15px;
-
-            border-radius: 10px;
-
-            border: none;
-
-        }
-
-        .upload-btn {
-
-            margin-top: 20px;
-
-            padding: 14px 30px;
-
-            border: none;
-
-            border-radius: 10px;
-
-            background: #00eaff;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-        }
-
-        footer {
-
-            text-align: center;
-
-            padding: 30px;
-
-            color: #aaa;
-
-        }
-
-        /* MOBILE */
-
-        @media(max-width:768px){
-
-            .hero h1{
-
-                font-size: 30px;
-
-            }
-
-            .navbar{
-
-                flex-direction: column;
-
-                gap: 15px;
-
-            }
-
-            iframe{
-
-                height: 220px;
-
-            }
-            .semester-card,
-             .tab{
-
-           text-decoration:none;
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Notes Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
 }
 
-            .profile{
-
-                flex-direction: column;
-=======
-<style>
-*{box-sizing:border-box}
 body{
-    min-height:100vh;
+    background:#0f172a;
+    color:white;
+}
+
+/* NAVBAR */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 30px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(5px);
+}
+
+.logo{
+    font-size:28px;
+    color:#00eaff;
+    font-weight:700;
+}
+
+.nav-links{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+}
+
+.toggle{
+    border:none;
+    padding:10px 18px;
+    border-radius:30px;
+    cursor:pointer;
+    background:#00eaff;
+    font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.hero h1{
+    font-size:40px;
+    color:#00eaff;
+}
+
+.hero p{
+    margin-top:12px;
+    color:#ccc;
+}
+
+/* SEMESTERS */
+
+.semester-grid{
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.semester-card{
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    padding:35px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+    font-size:20px;
+    font-weight:600;
+    text-decoration:none;
+    color:white;
+}
+
+.semester-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 20px rgba(0,234,255,0.4);
+}
+
+/* SEARCH */
+
+.search-box{
+    width:90%;
+    max-width:500px;
+    margin:40px auto;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px;
+    border-radius:30px;
+    border:none;
+    outline:none;
+    font-size:16px;
+}
+
+/* PDF GRID */
+
+.pdf-grid{
+    width:90%;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+    padding-bottom:60px;
+}
+
+.pdf-card{
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.pdf-card:hover{
+    transform:translateY(-8px);
+}
+
+.pdf-title{
+    background:linear-gradient(45deg,#00eaff,#0077ff);
+    color:black;
+    padding:16px;
+    text-align:center;
+    font-weight:700;
+}
+
+iframe{
+    width:100%;
+    height:250px;
+    border:none;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+    padding:15px;
+    color:#ddd;
+    font-size:14px;
+}
+
+.btns{
+    display:flex;
+    gap:10px;
+    padding:15px;
+}
+
+.btn{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.preview{
+    background:#00eaff;
+    color:black;
+}
+
+.download{
+    background:#ff0055;
+    color:white;
+}
+
+/* PROFILE */
+
+.profile{
+    width:90%;
+    margin:50px auto;
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    padding:30px;
     display:flex;
     align-items:center;
-    justify-content:center;
-    background:
-      radial-gradient(circle at top left,#00ffd5,transparent 55%),
-      radial-gradient(circle at bottom right,#6a00ff,transparent 55%),
-      #050010;
-    color:#fff;
-}
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    z-index:-1;
-}
-
-/* ===== LOGIN CARD ===== */
-.box{
-    position:relative;
-    width:90%;
-    max-width:360px;
-    padding:70px 26px 26px;
-    border-radius:18px;
-    background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.05));
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.2);
-    box-shadow:0 20px 40px rgba(0,0,0,.6);
-    text-align:center;
-    color:#ffe3a3;
-}
-
-/* ===== PROFILE IMAGE ===== */
-.profile{
-    position:absolute;
-    top:-1px;
-    left:50%;
-    transform:translateX(-50%);
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    overflow:hidden;
-    background:#000;
-}
-
-.profile::before{
-    content:"";
-    position:absolute;
-    inset:-4px;
-    border-radius:50%;
-    background:linear-gradient(45deg,cyan,magenta,cyan);
-    animation:rotate 3s linear infinite;
-    z-index:-1;
+    gap:20px;
 }
 
 .profile img{
-    width:100%;
-    height:100%;
+    width:100px;
+    height:100px;
     border-radius:50%;
-    object-fit:cover;
+    border:4px solid #00eaff;
 }
 
-@keyframes rotate{
-    100%{ transform:rotate(360deg); }
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#aaa;
 }
 
-/* ===== TEXT ===== */
-.title{
-    font-size:26px;
-    margin-bottom:10px;
-    text-shadow:0 0 12px rgba(8, 179, 188, 0.7);
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    iframe{
+        height:220px;
+    }
+
+    .profile{
+        flex-direction:column;
+        text-align:center;
+    }
 }
->>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
-
-                text-align: center;
-
-            }
-
-        }
-
-    </style>
-
-<<<<<<< HEAD
-=======
-/* ===== LOADER ===== */
-#loader{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:9998;
-}
-.spinner{
-    width:60px;
-    height:60px;
-    border:6px solid rgba(255,255,255,.2);
-    border-top:6px solid cyan;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
 </style>
->>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
 </head>
 
 <body>
 
-<<<<<<< HEAD
-    <!-- LOADER -->
+<div class="navbar">
+    <div class="logo">NOTES PORTAL</div>
 
-    <div class="loader">
+    <div class="nav-links">
+        <a href="#">Dashboard</a>
+        <a href="first.html">Notes</a>
+        <a href="#">PYQ</a>
+        <a href="#">Profile</a>
 
-        STUDENT PORTAL
+        <button class="toggle" onclick="toggleMode()">🌙 Mode</button>
 
+        <button class="toggle" onclick="logout()">Logout</button>
     </div>
+</div>
 
-    <!-- NAVBAR -->
+<div class="hero">
+    <h1>Welcome To Student Notes Portal</h1>
 
-    <div class="navbar">
-
-        <div class="logo">
-
-            NOTES PORTAL
-
-        </div>
-
-        <div class="nav-links">
-
-            <a href="#">Dashboard</a>
-
-            <a href="first.html" target="_blank">Notes</a>
-
-            <a href="#">PYQ</a>
-
-            <a href="#">Profile</a>
-
-            <button class="toggle"
-                onclick="toggleMode()">
-
-                🌙 Mode
-
-            </button>
-
-            <button class="toggle"
-                onclick="logout()">
-
-                Logout
-
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- HERO -->
-
-    <div class="hero">
-
-        <h1>
-
-            Welcome To Student Notes Portal
-
-        </h1>
-
-        <p>
-
-            Easy Access To Notes, PYQ & Study Materials
-
-        </p>
-
-    </div>
-
-    <!-- SEMESTERS -->
-
-    <!-- SEMESTERS -->
+    <p>Easy Access To Notes, PYQ & Study Materials</p>
+</div>
 
 <div class="semester-grid">
 
-    <a class="semester-card" target="_blank"
-        href="first.html">
+    <a class="semester-card" href="first.html">Semester 1</a>
 
-        Semester 1
+    <a class="semester-card" href="SEM2.html">Semester 2</a>
 
-    </a>
+    <a class="semester-card" href="sem3.html">Semester 3</a>
 
-    <a class="semester-card" target="_blank"
-        href="SEM2.html">
-
-        Semester 2
-
-    </a>
-
-    <a class="semester-card" target="_blank"
-        href="sem3.html">
-
-        Semester 3
-
-    </a>
-
-    <a class="semester-card" target="_blank"
-        href="sem4.html">
-
-        Semester 4
-
-    </a>
+    <a class="semester-card" href="sem4.html">Semester 4</a>
 
 </div>
 
-    </div>
-
-    <!-- SEARCH -->
-
-    <div class="search-box">
-
-        <input type="text"
-            id="searchInput"
-            placeholder="Search Notes...">
-=======
-<!-- TOAST -->
-<div id="toast" class="toast"></div>
-
-<!-- LOADER -->
-<div id="loader">
-    <div class="spinner"></div>
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Notes...">
 </div>
 
-<!-- SOUNDS -->
-<audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
-<audio id="errorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+<div class="pdf-grid" id="pdfGrid">
 
-<!-- LOGIN -->
-<div class="box" id="loginBox">
-    <div class="profile">
-        <img src="2img.jpeg" alt="Profile">
-    </div>
+    <div class="pdf-card">
 
-    <h2 class="title">Developed by Ayush 💻</h2>
-    <input id="loginUser" placeholder="Username">
-    <input id="loginPass" type="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-    <button onclick="goPayment()">💚 Support / Donate</button>
-    <p class="switch" onclick="showSignup()">Create new account</p>
-</div>
-
-<!-- SIGNUP -->
-<div class="box" id="signupBox" style="display:none">
-    <div class="profile">
-        <img src="my-img.jpeg" alt="Profile">
-    </div>
-
-    <h2 class="title">Signup</h2>
-    <input id="signupUser" placeholder="Username">
-    <input id="signupPass" type="password" placeholder="Password">
-    <button onclick="signup()">Signup</button>
-    <p class="switch" onclick="showLogin()">Back to login</p>
-</div>
->>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
-
-    </div>
-
-<<<<<<< HEAD
-    <!-- PDF GRID -->
-=======
-function showSignup(){
-    loginBox.style.display="none";
-    signupBox.style.display="block";
-}
-function showLogin(){
-    signupBox.style.display="none";
-    loginBox.style.display="block";
-}
->>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
-
-    <div class="pdf-grid"
-        id="pdfGrid">
-
-        <!-- PDF CARD -->
-
-<<<<<<< HEAD
-        <div class="pdf-card">
-
-            <div class="pdf-title">
-
-                PMO Important Questions
-
-            </div>
-
-            <iframe loading="lazy"
-                src="https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/preview"></iframe>
-
-            <div class="info">
-
-                <span>👁 1.2K Views</span>
-
-                <span>📥 560 Downloads</span>
-
-            </div>
-
-            <div class="btns">
-
-                <a class="btn preview"
-                    href="https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/view"
-                    target="_blank">
-
-                    Preview
-
-                </a>
-
-                <a class="btn download"
-                    href="https://drive.google.com/uc?export=download&id=1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf">
-
-                    Download
-
-                </a>
-
-            </div>
-
+        <div class="pdf-title">
+            PMO Important Questions
         </div>
 
-        <!-- PDF CARD -->
+        <iframe src="https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/preview"></iframe>
 
-        <div class="pdf-card">
-
-            <div class="pdf-title">
-
-                IT Networking Notes
-
-            </div>
-
-            <iframe loading="lazy"
-                src="https://drive.google.com/file/d/14SK2EOLymd-0DvHl6fneRao8UgJNzi9E/preview"></iframe>
-
-            <div class="info">
-
-                <span>👁 900 Views</span>
-
-                <span>📥 320 Downloads</span>
-
-            </div>
-
-            <div class="btns">
-
-                <a class="btn preview"
-                    href="https://drive.google.com/file/d/14SK2EOLymd-0DvHl6fneRao8UgJNzi9E/view"
-                    target="_blank">
-
-                    Preview
-
-                </a>
-
-                <a class="btn download"
-                    href="https://drive.google.com/uc?export=download&id=14SK2EOLymd-0DvHl6fneRao8UgJNzi9E">
-
-                    Download
-
-                </a>
-
-            </div>
-
+        <div class="info">
+            <span>👁 1.2K Views</span>
+            <span>📥 560 Downloads</span>
         </div>
 
-    </div>
+        <div class="btns">
 
-    <!-- PROFILE -->
+            <a class="btn preview"
+               href="https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/view"
+               target="_blank">
 
-    <div class="profile">
+               Preview
+            </a>
 
-        <img src="https://i.pravatar.cc/150?img=3">
+            <a class="btn download"
+               href="https://drive.google.com/uc?export=download&id=1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf">
 
-        <div>
-
-            <h2>
-
-                Student Profile
-
-            </h2>
-
-            <p>
-
-                Name:
-                <span id="username"></span>
-
-            </p>
-
-            <p>
-
-                Email:
-                student@gmail.com
-
-            </p>
-
-            <p>
-
-                Semester:
-                1st Semester
-
-            </p>
+               Download
+            </a>
 
         </div>
-
     </div>
+</div>
 
-    <!-- ADMIN PANEL -->
+<div class="profile">
 
-    <div class="admin-panel">
+    <img src="https://i.pravatar.cc/150?img=3">
 
-        <h2>
+    <div>
+        <h2>Student Profile</h2>
 
-            Admin Upload Panel
+        <p>Name: <span id="username"></span></p>
 
-        </h2>
+        <p>Email: student@gmail.com</p>
 
-        <input type="text"
-            placeholder="PDF Title">
-
-        <input type="text"
-            placeholder="Google Drive Preview Link">
-
-        <input type="text"
-            placeholder="Download Link">
-
-        <button class="upload-btn">
-
-            Upload PDF
-
-        </button>
-
+        <p>Semester: 1st Semester</p>
     </div>
+</div>
 
-    <footer>
+<footer>
+    © 2026 Student Notes Portal
+</footer>
 
-        © 2026 Student Notes Portal
+<script>
 
-    </footer>
+document.getElementById("username").innerText =
+localStorage.getItem("currentUser") || "Guest";
 
-    <script>
+/* DARK MODE */
 
-        // USERNAME
+function toggleMode(){
+    document.body.classList.toggle("light");
+}
 
-        document.getElementById("username")
-            .innerText =
-            localStorage.getItem("currentUser");
+/* LOGOUT */
 
-        // DARK MODE
+function logout(){
+    localStorage.removeItem("loggedIn");
+    location.href="index.html";
+}
 
-        function toggleMode(){
+/* SEARCH */
 
-            document.body.classList.toggle("light");
+const searchInput =
+document.getElementById("searchInput");
 
+const cards =
+document.querySelectorAll(".pdf-card");
+
+searchInput.addEventListener("keyup",()=>{
+
+    const value =
+    searchInput.value.toLowerCase();
+
+    cards.forEach(card=>{
+
+        const text =
+        card.innerText.toLowerCase();
+
+        if(text.includes(value)){
+            card.style.display="block";
+        }
+        else{
+            card.style.display="none";
         }
 
-        // LOGOUT
+    });
 
-        function logout(){
+});
 
-            localStorage.removeItem("loggedIn");
-
-            location.href="index.html";
-        }
-
-        function login(){
-
-            localStorage.removeItem("loggedIn");
-
-            location.href="index.html";
-
-        }
-
-        // SEARCH
-
-        const searchInput =
-            document.getElementById("searchInput");
-
-        const cards =
-            document.querySelectorAll(".pdf-card");
-
-        searchInput.addEventListener("keyup",()=>{
-
-            const value =
-                searchInput.value.toLowerCase();
-
-            cards.forEach(card=>{
-
-                const text =
-                    card.innerText.toLowerCase();
-
-                if(text.includes(value)){
-
-                    card.style.display="block";
-
-                }
-
-                else{
-
-                    card.style.display="none";
-
-                }
-
-            });
-
-        });
-        function login(){
-
-let u = loginUser.value;
-
-let p = loginPass.value;
-
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-let ok =
-users.find(x =>
-x.username === u &&
-x.password === p);
-
-if(ok){
-
-localStorage.setItem("loggedIn","true");
-
-localStorage.setItem("currentUser",u);
-
-localStorage.setItem(
-"userEmail",
-u + "@gmail.com"
-);
-
-location.href = "home.html";
-
-}
-
-else{
-
-alert("Wrong Username or Password");
-
-}
-
-}
-
-    </script>
-
-</body>
-
-
-=======
-    loader.style.display="flex";
-    setTimeout(()=>{
-        loader.style.display="none";
-        if(ok){
-            successSound.play();
-            showToast("Welcome back "+u+" 👋","success");
-            localStorage.setItem("loggedIn","true");
-            setTimeout(()=>location.href="SELECT.html",1500);
-        }else{
-            errorSound.play();
-            showToast("Wrong username or password","error");
-        }
-    },1200);
-}
-
-function goPayment(){
-    localStorage.setItem("currentUser",loginUser.value||"Guest");
-    location.href="paymet.html";
-}
 </script>
 
 </body>
->>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
 </html>
