@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IT Application Notes</title>
+
+    <!-- LOGIN PROTECTION -->
+    <script>
+        if (localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "index.html";
+        }
+    </script>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.75),
+                    rgba(0, 0, 0, 0.75)),
+                url("https://png.pngtree.com/background/20230416/original/pngtree-ai-robot-innovation-high-tech-ppt-robot-template-background-image-picture-image_2443210.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            width: 100%;
+            padding: 15px 40px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00eaff;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            padding: 10px 22px;
+            background: #00eaff;
+            color: black;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .home-btn:hover {
+            background: #ff0055;
+            color: white;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 50px 20px 20px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #00eaff;
+        }
+
+        .header p {
+            color: #ddd;
+            font-size: 17px;
+        }
+
+        /* SEARCH */
+        .search-box {
+            max-width: 500px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 40px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding-left: 50px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 16px;
+            color: gray;
+        }
+
+        /* GRID */
+        .pdf-grid {
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        /* CARD */
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0, 234, 255, 0.4);
+        }
+
+        .card-header {
+            padding: 18px;
+            background: linear-gradient(45deg, #00eaff, #0077ff);
+            color: black;
+            font-weight: 700;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 18px;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .preview {
+            background: #00eaff;
+            color: black;
+        }
+
+        .download {
+            background: #ff0055;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.04);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #aaa;
+        }
+
+        /* MOBILE */
+        @media(max-width:768px) {
+
+            .header h1 {
+                font-size: 30px;
+            }
+
+            iframe {
+                height: 250px;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">IT Notes</div>
+
+        <a href="FIRSTSEM.html" class="home-btn">
+            <i class="fa-solid fa-house"></i> Home
+        </a>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>IT Application & Robotics</h1>
+        <p>Easy access to all important PDFs and handwritten notes</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search PDF...">
+    </div>
+
+    <!-- PDF GRID -->
+    <div class="pdf-grid" id="pdfContainer">
+
+        <!-- CARD 1 -->
+        <div class="card">
+            <div class="card-header">
+                Important Questions
+            </div>
+
+            <iframe src="https://drive.google.com/file/d/1L2LNWXAHr5YJH2wTGRZjlmEf9unI60mZ/preview"></iframe>
+
+            <div class="btn-group">
+
+                <a class="btn preview"
+                    href="https://drive.google.com/file/d/1L2LNWXAHr5YJH2wTGRZjlmEf9unI60mZ/view"
+                    target="_blank">
+                    Preview
+                </a>
+
+                <a class="btn download"
+                    href="https://drive.google.com/uc?export=download&id=1L2LNWXAHr5YJH2wTGRZjlmEf9unI60mZ">
+                    Download
+                </a>
+
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card">
+
+            <div class="card-header">
+                Exam Question 1 - Networking
+            </div>
+
+            <iframe src="https://drive.google.com/file/d/14SK2EOLymd-0DvHl6fneRao8UgJNzi9E/preview"></iframe>
+
+            <div class="btn-group">
+
+                <a class="btn preview"
+                    href="https://drive.google.com/file/d/14SK2EOLymd-0DvHl6fneRao8UgJNzi9E/view"
+                    target="_blank">
+                    Preview
+                </a>
+
+                <a class="btn download"
+                    href="https://drive.google.com/uc?export=download&id=14SK2EOLymd-0DvHl6fneRao8UgJNzi9E">
+                    Download
+                </a>
+
+            </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card">
+
+            <div class="card-header">
+                Exam Question & Answer
+            </div>
+
+            <iframe src="https://drive.google.com/file/d/1EwVb47LC-XAtaMkKgmKw0UjXZhnu6F6K/preview"></iframe>
+
+            <div class="btn-group">
+
+                <a class="btn preview"
+                    href="https://drive.google.com/file/d/1EwVb47LC-XAtaMkKgmKw0UjXZhnu6F6K/view"
+                    target="_blank">
+                    Preview
+                </a>
+
+                <a class="btn download"
+                    href="https://drive.google.com/uc?export=download&id=1EwVb47LC-XAtaMkKgmKw0UjXZhnu6F6K">
+                    Download
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 IT Application Notes Library | Designed Professionally
+    </footer>
+
+    <!-- SEARCH SCRIPT -->
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const cards = document.querySelectorAll(".card");
+
+        searchInput.addEventListener("keyup", () => {
+
+            const value = searchInput.value.toLowerCase();
+
+            cards.forEach(card => {
+
+                const text = card.innerText.toLowerCase();
+
+                if (text.includes(value)) {
+                    card.style.display = "block";
+                }
+
+                else {
+                    card.style.display = "none";
+                }
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

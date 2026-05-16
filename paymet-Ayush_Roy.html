@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Support the Creator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at top right,#ff8a00,transparent 55%),
+      radial-gradient(circle at bottom left,#00ffd5,transparent 55%),
+      #070013;
+    color:#fff;
+    overflow:hidden;
+}
+
+/* glow background */
+.glow{
+    position:absolute;
+    width:260px;
+    height:260px;
+    background:#00ffd5;
+    filter:blur(130px);
+    opacity:.22;
+    animation:float 8s infinite alternate ease-in-out;
+}
+@keyframes float{
+    from{transform:translate(-120px,-60px)}
+    to{transform:translate(120px,80px)}
+}
+
+/* card */
+.card{
+    width:92%;
+    max-width:420px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(14px);
+    border-radius:22px;
+    padding:28px;
+    text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.7);
+    position:relative;
+    z-index:2;
+}
+
+/* icon */
+.icon{
+    width:80px;
+    height:80px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    overflow:hidden;
+    border:3px solid #ffcc33;
+    box-shadow:0 0 25px #ffb347;
+}
+.icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+h1{
+    font-size:26px;
+    margin-bottom:6px;
+}
+.sub{
+    font-size:14px;
+    opacity:.85;
+    margin-bottom:18px;
+}
+
+/* amount box */
+.amount-box{
+    background:rgba(0,0,0,.45);
+    padding:18px;
+    border-radius:16px;
+    margin-bottom:16px;
+}
+.amount-box label{
+    display:block;
+    font-size:13px;
+    opacity:.8;
+    margin-bottom:6px;
+}
+.amount-box input{
+    width:100%;
+    padding:14px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    text-align:center;
+    outline:none;
+}
+
+/* quick buttons */
+.quick{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+.quick button{
+    flex:1;
+    padding:10px;
+    font-size:14px;
+    border-radius:12px;
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    cursor:pointer;
+}
+.quick button:hover{
+    background:rgba(255,255,255,.25);
+}
+
+/* pay button */
+.pay{
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:16px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#00ffd5,#00aaff);
+    color:#022;
+}
+.pay:hover{opacity:.9}
+
+/* back */
+.back{
+    margin-top:12px;
+    font-size:13px;
+    opacity:.75;
+    cursor:pointer;
+}
+
+/* qr box */
+#qrBox{
+    display:none;
+    margin-top:15px;
+    text-align:center;
+}
+#qrBox img{
+    width:200px;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,255,213,.7);
+}
+
+.note{
+    margin-top:14px;
+    font-size:12px;
+    opacity:.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+
+<div class="card">
+
+    <div class="icon">
+        <img src="2img.jpeg" alt="Creator">
+    </div>
+
+    <h1>Support the Creator</h1>
+    <div class="sub">Your support keeps this project alive ☕</div>
+
+    <div class="amount-box">
+        <label>Enter Donation Amount (₹)<br>Minimum ₹10</label>
+        <input id="amount" type="number" placeholder="100">
+
+        <div class="quick">
+            <button onclick="setAmt(10)">₹10</button>
+            <button onclick="setAmt(20)">₹20</button>
+            <button onclick="setAmt(50)">₹50</button>
+        </div>
+    </div>
+
+    <button class="pay" onclick="payUPI()">Pay via UPI</button>
+
+    <div id="qrBox">
+        <img id="upiQR">
+        <p style="font-size:13px;opacity:.8;margin-top:6px;">
+            Scan & Pay with any UPI app
+        </p>
+    </div>
+
+    <div class="back" onclick="goBack()">← Back to Home</div>
+
+    <div class="note">
+        You will be redirected to your UPI app to complete the payment.
+    </div>
+
+</div>
+
+<script>
+function setAmt(v){
+    document.getElementById("amount").value = v;
+}
+
+function payUPI(){
+    const amt = document.getElementById("amount").value;
+
+    if(!amt || amt < 10){
+        alert("Minimum donation is ₹10");
+        return;
+    }
+
+    const upiId = "8579862692@upi"; // apna UPI
+    const name  = "Ayush Website";
+    const note  = "Support Donation";
+
+    const upiURL =
+      `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amt}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+    // Mobile → direct UPI
+    if(/Android|iPhone|iPad/i.test(navigator.userAgent)){
+        window.location.href = upiURL;
+    }
+    // Desktop → QR
+    else{
+        document.getElementById("upiQR").src =
+          `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiURL)}`;
+        document.getElementById("qrBox").style.display = "block";
+    }
+}
+
+function goBack(){
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
