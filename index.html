@@ -3,6 +3,7 @@
 
 <head>
 
+<<<<<<< HEAD
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -599,6 +600,84 @@
             .profile{
 
                 flex-direction: column;
+=======
+<style>
+*{box-sizing:border-box}
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at top left,#00ffd5,transparent 55%),
+      radial-gradient(circle at bottom right,#6a00ff,transparent 55%),
+      #050010;
+    color:#fff;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:-1;
+}
+
+/* ===== LOGIN CARD ===== */
+.box{
+    position:relative;
+    width:90%;
+    max-width:360px;
+    padding:70px 26px 26px;
+    border-radius:18px;
+    background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.05));
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+    text-align:center;
+    color:#ffe3a3;
+}
+
+/* ===== PROFILE IMAGE ===== */
+.profile{
+    position:absolute;
+    top:-1px;
+    left:50%;
+    transform:translateX(-50%);
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    overflow:hidden;
+    background:#000;
+}
+
+.profile::before{
+    content:"";
+    position:absolute;
+    inset:-4px;
+    border-radius:50%;
+    background:linear-gradient(45deg,cyan,magenta,cyan);
+    animation:rotate 3s linear infinite;
+    z-index:-1;
+}
+
+.profile img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+@keyframes rotate{
+    100%{ transform:rotate(360deg); }
+}
+
+/* ===== TEXT ===== */
+.title{
+    font-size:26px;
+    margin-bottom:10px;
+    text-shadow:0 0 12px rgba(8, 179, 188, 0.7);
+}
+>>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
 
                 text-align: center;
 
@@ -608,10 +687,34 @@
 
     </style>
 
+<<<<<<< HEAD
+=======
+/* ===== LOADER ===== */
+#loader{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9998;
+}
+.spinner{
+    width:60px;
+    height:60px;
+    border:6px solid rgba(255,255,255,.2);
+    border-top:6px solid cyan;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+>>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
 </head>
 
 <body>
 
+<<<<<<< HEAD
     <!-- LOADER -->
 
     <div class="loader">
@@ -721,16 +824,68 @@
         <input type="text"
             id="searchInput"
             placeholder="Search Notes...">
+=======
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
+
+<!-- SOUNDS -->
+<audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
+<audio id="errorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+
+<!-- LOGIN -->
+<div class="box" id="loginBox">
+    <div class="profile">
+        <img src="2img.jpeg" alt="Profile">
+    </div>
+
+    <h2 class="title">Developed by Ayush 💻</h2>
+    <input id="loginUser" placeholder="Username">
+    <input id="loginPass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="goPayment()">💚 Support / Donate</button>
+    <p class="switch" onclick="showSignup()">Create new account</p>
+</div>
+
+<!-- SIGNUP -->
+<div class="box" id="signupBox" style="display:none">
+    <div class="profile">
+        <img src="my-img.jpeg" alt="Profile">
+    </div>
+
+    <h2 class="title">Signup</h2>
+    <input id="signupUser" placeholder="Username">
+    <input id="signupPass" type="password" placeholder="Password">
+    <button onclick="signup()">Signup</button>
+    <p class="switch" onclick="showLogin()">Back to login</p>
+</div>
+>>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
 
     </div>
 
+<<<<<<< HEAD
     <!-- PDF GRID -->
+=======
+function showSignup(){
+    loginBox.style.display="none";
+    signupBox.style.display="block";
+}
+function showLogin(){
+    signupBox.style.display="none";
+    loginBox.style.display="block";
+}
+>>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
 
     <div class="pdf-grid"
         id="pdfGrid">
 
         <!-- PDF CARD -->
 
+<<<<<<< HEAD
         <div class="pdf-card">
 
             <div class="pdf-title">
@@ -995,4 +1150,28 @@ alert("Wrong Username or Password");
 </body>
 
 
+=======
+    loader.style.display="flex";
+    setTimeout(()=>{
+        loader.style.display="none";
+        if(ok){
+            successSound.play();
+            showToast("Welcome back "+u+" 👋","success");
+            localStorage.setItem("loggedIn","true");
+            setTimeout(()=>location.href="SELECT.html",1500);
+        }else{
+            errorSound.play();
+            showToast("Wrong username or password","error");
+        }
+    },1200);
+}
+
+function goPayment(){
+    localStorage.setItem("currentUser",loginUser.value||"Guest");
+    location.href="paymet.html";
+}
+</script>
+
+</body>
+>>>>>>> 0028ed71d3e2bd562b746ad27732ba3d72ab57d4
 </html>

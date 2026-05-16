@@ -6,7 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",Arial,sans-serif}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
 
 body{
     min-height:100vh;
@@ -21,7 +26,7 @@ body{
     overflow:hidden;
 }
 
-/* glow blobs */
+/* glow background */
 .glow{
     position:absolute;
     width:260px;
@@ -50,19 +55,20 @@ body{
     z-index:2;
 }
 
-/* header */
+/* icon */
 .icon{
-    width:70px;
-    height:70px;
-    margin:0 auto 10px;
+    width:80px;
+    height:80px;
+    margin:0 auto 12px;
     border-radius:50%;
-    background:linear-gradient(135deg,#ffb347,#ffcc33);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:34px;
-    color:#2b1500;
+    overflow:hidden;
+    border:3px solid #ffcc33;
     box-shadow:0 0 25px #ffb347;
+}
+.icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 h1{
@@ -82,14 +88,12 @@ h1{
     border-radius:16px;
     margin-bottom:16px;
 }
-
 .amount-box label{
     display:block;
     font-size:13px;
     opacity:.8;
     margin-bottom:6px;
 }
-
 .amount-box input{
     width:100%;
     padding:14px;
@@ -145,6 +149,18 @@ h1{
     cursor:pointer;
 }
 
+/* qr box */
+#qrBox{
+    display:none;
+    margin-top:15px;
+    text-align:center;
+}
+#qrBox img{
+    width:200px;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,255,213,.7);
+}
+
 .note{
     margin-top:14px;
     font-size:12px;
@@ -159,19 +175,18 @@ h1{
 
 <div class="card">
 
-    <div class="icon">💚</div>
+    <div class="icon">
+        <img src="2img.jpeg" alt="Creator">
+    </div>
 
     <h1>Support the Creator</h1>
     <div class="sub">Your support keeps this project alive ☕</div>
 
     <div class="amount-box">
-        <label>Enter Donation Amount (₹) <br>Minimum donation ₹10
-</label>
+        <label>Enter Donation Amount (₹)<br>Minimum ₹10</label>
         <input id="amount" type="number" placeholder="100">
 
         <div class="quick">
-            
-
             <button onclick="setAmt(10)">₹10</button>
             <button onclick="setAmt(20)">₹20</button>
             <button onclick="setAmt(50)">₹50</button>
@@ -180,6 +195,13 @@ h1{
 
     <button class="pay" onclick="payUPI()">Pay via UPI</button>
 
+    <div id="qrBox">
+        <img id="upiQR">
+        <p style="font-size:13px;opacity:.8;margin-top:6px;">
+            Scan & Pay with any UPI app
+        </p>
+    </div>
+
     <div class="back" onclick="goBack()">← Back to Home</div>
 
     <div class="note">
@@ -187,25 +209,6 @@ h1{
     </div>
 
 </div>
-<!-- QR BOX -->
-<div id="qrBox" style="
-    display:none;
-    margin-top:15px;
-    text-align:center;
-">
-    <img id="upiQR"
-         style="width:200px;border-radius:12px;
-         box-shadow:0 0 20px rgba(0,255,213,.7);">
-    <p style="font-size:13px;opacity:.8;margin-top:6px;">
-        Scan & Pay with any UPI app
-    </p>
-</div>
-<!--qrhide-->
-
-</button>
-
-
-
 
 <script>
 function setAmt(v){
@@ -214,70 +217,34 @@ function setAmt(v){
 
 function payUPI(){
     const amt = document.getElementById("amount").value;
-    if(!amt || amt<=0){
-        alert("Please enter a valid amount");
-        return;
-    }
-
-    // save fake receipt data
-    localStorage.setItem("donationAmount", amt);
-    localStorage.setItem("donationTime", new Date().toLocaleString());
-    localStorage.setItem(
-        "donationTxn",
-        "TXN"+Math.floor(Math.random()*100000000)
-    );
-
-    const upiId = "8579862692@upi";   // 🔴 apna UPI ID
-    const note = "Support Donation";
-
-    const url =
-      `upi://pay?pa=${upiId}&am=${amt}&cu=INR&tn=${encodeURIComponent(note)}`;
-
-    // open UPI app
-    window.location.href = url;
-
-    // fake success redirect
-    setTimeout(()=>{
-        window.location.href = "sucess.html";
-    },2000);
-}
-
-function goBack(){
-    window.location.href = "index.html";
-
-}
-function payUPI(){
-    const amt = document.getElementById("amount").value;
 
     if(!amt || amt < 10){
         alert("Minimum donation is ₹10");
         return;
     }
 
-    const upiId = "8579862692@upi";   // 🔴 apna UPI
+    const upiId = "8579862692@upi"; // apna UPI
     const name  = "Ayush Website";
     const note  = "Support Donation";
 
     const upiURL =
       `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amt}&cu=INR&tn=${encodeURIComponent(note)}`;
 
-    // 📱 Mobile → Direct UPI app
+    // Mobile → direct UPI
     if(/Android|iPhone|iPad/i.test(navigator.userAgent)){
         window.location.href = upiURL;
     }
-    // 🖥️ Desktop → QR show
+    // Desktop → QR
     else{
         document.getElementById("upiQR").src =
           `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(upiURL)}`;
-
         document.getElementById("qrBox").style.display = "block";
-        setTimeout(()=>qrBox.style.display="none",10000);
     }
-   
-
 }
 
-
+function goBack(){
+    window.location.href = "index.html";
+}
 </script>
 
 </body>
