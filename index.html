@@ -48,14 +48,107 @@ body{
     color:white;
     text-decoration:none;
 }
+/* insta */
+.creator{
+
+text-align:center;
+
+padding:25px;
+
+margin-top:20px;
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:blur(8px);
+
+border-top:1px solid
+rgba(255,255,255,.08);
+
+}
+
+.creator h3{
+
+color:#00eaff;
+
+margin-bottom:8px;
+
+font-size:22px;
+
+}
+
+.creator a{
+
+text-decoration:none;
+
+color:#ff4da6;
+
+font-size:16px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.creator a:hover{
+
+color:#00eaff;
+
+}
+
+/* SMALL MODE BUTTON */
 
 .toggle{
-    border:none;
-    padding:10px 18px;
-    border-radius:30px;
-    cursor:pointer;
-    background:#00eaff;
-    font-weight:bold;
+
+padding:8px 14px;
+
+font: size 10px;
+
+border:none;
+
+border-radius:20px;
+
+cursor:pointer;
+
+background:#710354;
+
+font-weight:600;
+
+}
+
+/* LIGHT MODE */
+
+body.light{
+
+background:#240021;
+
+color:rgb(19, 19, 19);
+
+}
+
+body.light .navbar,
+body.light .pdf-card,
+body.light .semester-card,
+body.light .mini-box,
+body.light .mini-profile{
+
+background:#ffffff;
+
+color:black;
+
+}
+
+body.light .nav-links a{
+
+color:black;
+
+}
+
+body.light .pdf-title{
+
+color:rgb(9, 175, 201);
+
 }
 
 /* HERO */
@@ -87,21 +180,25 @@ body{
 }
 
 .semester-card{
-    background:rgba(255,255,255,0.05);
+    background:rgba(208, 197, 3, 0.05);
     border-radius:20px;
     padding:35px;
+   
     text-align:center;
+    ;
+    
     cursor:pointer;
-    transition:.3s;
-    font-size:20px;
+    transition:.2s;
+    font-size:25px;
+    font-weight: bolder;
     font-weight:600;
     text-decoration:none;
     color:white;
 }
 
 .semester-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 20px rgba(0,234,255,0.4);
+    transform:translateY(-10px);
+    box-shadow:0 0 20px rgba(153, 3, 3, 0.4);
 }
 
 /* SEARCH */
@@ -218,9 +315,192 @@ footer{
     color:#aaa;
 }
 
+/* MINI SECTION */
+
+.mini-section{
+
+    width:90%;
+
+    margin:40px auto;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.mini-box{
+
+    width:100%;
+
+    max-width:700px;
+
+    background:rgba(255,255,255,0.05);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 0 20px rgba(0,0,0,.2);
+}
+
+.mini-box h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    color:#00eaff;
+
+    font-size:24px;
+}
+
+/* FORM */
+
+.mini-form{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(150px,1fr));
+
+    gap:15px;
+}
+
+.mini-form input{
+
+    padding:12px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.08);
+
+    color:white;
+}
+
+.mini-form input::placeholder{
+
+    color:#ccc;
+}
+
+.mini-form button{
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(45deg,#00eaff,#0077ff);
+
+    color:black;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.mini-form button:hover{
+
+    transform:scale(1.03);
+}
+
+    
+
+/* MINI PROFILE */
+
+.mini-profile{
+
+    width:90%;
+
+    margin:30px auto;
+
+    padding:18px 22px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,0.06);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    backdrop-filter:blur(8px);
+
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+.mini-profile img{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    border:3px solid #00eaff;
+}
+
+.profile-info{
+
+    flex:1;
+}
+
+.profile-info h3{
+
+    font-size:18px;
+
+    color:#00eaff;
+}
+
+.profile-info p{
+
+    font-size:13px;
+
+    color:#ccc;
+
+    margin-top:4px;
+}
+
+.profile-btn{
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    background:linear-gradient(45deg,#00eaff,#0077ff);
+
+    color:black;
+
+    font-weight:600;
+}
+
 /* MOBILE */
 
 @media(max-width:768px){
+
+    .mini-profile{
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+}
+/* MOBILE */
+
+@media(max-width:770px){
 
     .hero h1{
         font-size:30px;
@@ -247,17 +527,45 @@ footer{
 
 <div class="navbar">
     <div class="logo">NOTES PORTAL</div>
+    
 
     <div class="nav-links">
-        <a href="#">Dashboard</a>
+        
         <a href="first.html">Notes</a>
         <a href="#">PYQ</a>
         <a href="#">Profile</a>
 
-        <button class="toggle" onclick="toggleMode()">🌙 Mode</button>
+        <!-- DARK MODE BUTTON SMALL -->
+<button class="toggle" onclick="toggleMode()">🌙</button>
 
-        <button class="toggle" onclick="logout()">Logout</button>
+        
     </div>
+</div>
+<!-- MINI PROFILE SECTION -->
+
+<div class="mini-profile">
+
+    <img src="2img.jpeg">
+
+    <div class="profile-info">
+
+        <h3 id="studentName">
+            Welcome 👋
+        </h3>
+
+        <p>
+            Student Notes Portal Member
+        </p>
+
+    </div>
+
+    <button class="profile-btn">
+
+        Active
+
+    </button>
+
+</div>
 </div>
 
 <div class="hero">
@@ -276,83 +584,282 @@ footer{
 
     <a class="semester-card" href="sem4.html">Semester 4</a>
 
+    <a class="semester-card" href="sem5.html">Semester 5</a>
+
+    <a class="semester-card" href="sem6.html">Semester 6</a>
+
 </div>
+
+<!-- SEARCH -->
 
 <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search Notes...">
+
+    <input type="text"
+           id="searchInput"
+           placeholder="Search Any PDF Notes...">
+
 </div>
 
-<div class="pdf-grid" id="pdfGrid">
+<!-- PDF GRID -->
 
-    <div class="pdf-card">
+<div class="pdf-grid" id="pdfGrid"></div>
 
-        <div class="pdf-title">
-            PMO Important Questions
+<script>
+
+/* PDF DATABASE */
+
+const pdfs = [
+
+{
+    title:"Python practice notes",
+    subject:"Python",
+    views:"3K",
+    downloads:"1.5K",
+    preview:"https://drive.google.com/file/d/1_1E0_Jby-aBTpqVhY_5hryFIsF4Ks17J/preview",
+    view:"https://drive.google.com/file/d/1_1E0_Jby-aBTpqVhY_5hryFIsF4Ks17J/view",
+    download:"https://drive.google.com/uc?export=download&id=1_1E0_Jby-aBTpqVhY_5hryFIsF4Ks17J"
+},
+
+{
+    title:"Python handwriten PDF",
+    subject:"Python",
+    views:"3K",
+    downloads:"1.5K",
+    preview:"https://drive.google.com/file/d/1R1Lk6WSHuGIUp7hcgdHz7GYzZ5JnctrR/preview",
+    view:"https://drive.google.com/file/d/1R1Lk6WSHuGIUp7hcgdHz7GYzZ5JnctrR/view",
+    download:"https://drive.google.com/uc?export=download&id=1R1Lk6WSHuGIUp7hcgdHz7GYzZ5JnctrR"
+},
+
+{
+    title:"PMO Important Questions",
+    subject:"PMO",
+    views:"1.2K",
+    downloads:"560",
+    preview:"https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/preview",
+    view:"https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/view",
+    download:"https://drive.google.com/uc?export=download&id=1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf"
+},
+
+{
+    title:"IT Networking Notes",
+    subject:"Networking",
+    views:"900",
+    downloads:"320",
+    preview:"https://drive.google.com/file/d/14SK2EOLymd-0DvHl6fneRao8UgJNzi9E/preview",
+    view:"https://drive.google.com/file/d/14SK2EOLymd-0DvHl6fneRao8UgJNzi9E/view",
+    download:"https://drive.google.com/uc?export=download&id=14SK2EOLymd-0DvHl6fneRao8UgJNzi9E"
+},
+
+{
+    title:"management Full Notes",
+    subject:"it",
+    views:"2K",
+    downloads:"1K",
+    preview:"https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/preview",
+    view:"https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/view",
+    download:"https://drive.google.com/uc?export=download&id=1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf"
+},
+{
+    title:"it only memory page tak",
+    subject:"it",
+    views:"2K",
+    downloads:"1K",
+    preview:"https://drive.google.com/file/d/1L2LNWXAHr5YJH2wTGRZjlmEf9unI60mZ/preview",
+    view:"https://drive.google.com/file/d/1L2LNWXAHr5YJH2wTGRZjlmEf9unI60mZ/view",
+    download:"https://drive.google.com/uc?export=download&id=1L2LNWXAHr5YJH2wTGRZjlmEf9unI60mZf"
+},
+
+
+ 
+
+
+];
+
+/* SHOW PDFs */
+
+function showPDFs(data){
+
+    const grid =
+    document.getElementById("pdfGrid");
+
+    grid.innerHTML = "";
+
+    if(data.length === 0){
+
+        grid.innerHTML = `
+        <h2 style="text-align:center;color:red;">
+            No PDF Found 😢
+        </h2>
+        `;
+
+        return;
+    }
+
+    data.forEach(pdf => {
+
+        grid.innerHTML += `
+
+        <div class="pdf-card">
+
+            <div class="pdf-title">
+
+                ${pdf.title}
+
+            </div>
+
+            <iframe loading="lazy"
+                src="${pdf.preview}">
+            </iframe>
+
+            <div class="info">
+
+                <span>👁 ${pdf.views}</span>
+
+                <span>📥 ${pdf.downloads}</span>
+
+            </div>
+
+            <div class="btns">
+
+                <a class="btn preview"
+                   href="${pdf.view}"
+                   target="_blank">
+
+                    Preview
+
+                </a>
+
+                <a class="btn download"
+                   href="${pdf.download}">
+
+                    Download
+
+                </a>
+
+            </div>
+
         </div>
 
-        <iframe src="https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/preview"></iframe>
+        `;
 
-        <div class="info">
-            <span>👁 1.2K Views</span>
-            <span>📥 560 Downloads</span>
+    });
+
+}
+
+
+/* INITIAL LOAD */
+
+showPDFs(pdfs);
+
+/* LIVE SEARCH */
+
+document
+.getElementById("searchInput")
+.addEventListener("keyup", function(){
+
+    const value =
+    this.value.toLowerCase();
+
+    const filtered =
+    pdfs.filter(pdf =>
+
+        pdf.title.toLowerCase().includes(value) ||
+
+        pdf.subject.toLowerCase().includes(value)
+
+    );
+
+    showPDFs(filtered);
+
+});
+
+</script>
+
+
+<!-- STUDENT INFO SECTION -->
+
+<div class="mini-section">
+
+    <div class="mini-box">
+
+        <h2>Student Details ✨</h2>
+
+        <div class="mini-form">
+
+            <input type="text"
+                   placeholder="Your Name">
+
+            <input type="email"
+                   placeholder="Email">
+
+            <input type="text"
+                   placeholder="Class">
+
+            <button>
+
+                Submit
+
+            </button>
+
         </div>
 
-        <div class="btns">
-
-            <a class="btn preview"
-               href="https://drive.google.com/file/d/1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf/view"
-               target="_blank">
-
-               Preview
-            </a>
-
-            <a class="btn download"
-               href="https://drive.google.com/uc?export=download&id=1l8YdgxObu15Z3r1l4Lq_mJY6pwaFPnrf">
-
-               Download
-            </a>
-
-        </div>
     </div>
-</div>
 
-<div class="profile">
-
-    <img src="https://i.pravatar.cc/150?img=3">
-
-    <div>
-        <h2>Student Profile</h2>
-
-        <p>Name: <span id="username"></span></p>
-
-        <p>Email: student@gmail.com</p>
-
-        <p>Semester: 1st Semester</p>
-    </div>
 </div>
 
 <footer>
     © 2026 Student Notes Portal
 </footer>
+<div class="creator">
+
+    <h3>
+
+    <pre>      Designed By Ayush</pre>
+
+    </h3>
+
+    <a href="https://instagram.com/ayush_yadav____0"
+        target="_blank">
+
+        📸 @ayush_yadav____0
+
+    </a>
+
+</div>
 
 <script>
 
 document.getElementById("username").innerText =
 localStorage.getItem("currentUser") || "Guest";
 
-/* DARK MODE */
+
+/* DARK MODE SAVE */
 
 function toggleMode(){
-    document.body.classList.toggle("light");
+
+document.body.classList.toggle("light");
+
+if(document.body.classList.contains("light")){
+
+localStorage.setItem("theme","light");
+
 }
 
-/* LOGOUT */
+else{
 
-function logout(){
-    localStorage.removeItem("loggedIn");
-    location.href="index.html";
+localStorage.setItem("theme","dark");
+
 }
 
+}
+
+/* PAGE LOAD */
+
+if(localStorage.getItem("theme")==="light"){
+
+document.body.classList.add("light");
+
+}
 /* SEARCH */
 
 const searchInput =
